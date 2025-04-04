@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from google import genai
+import google.generativeai as genai  ✅  # CORRECT
 import streamlit as st
 import requests
 from bs4 import BeautifulSoup
