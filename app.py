@@ -17,74 +17,95 @@ st.set_page_config(page_title="🎬 Safeguarding Stories", layout="wide")
 # 💫 Full Gradient Background & Modern Glassmorphism UI
 st.markdown("""
 <style>
-/* 🌈 Import Poppins Font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-html, body, [class*="css"] {
-    font-family: 'Poppins', sans-serif !important;
-}
+    html, body, [class*="css"] {
+        font-family: 'Poppins', sans-serif;
+    }
 
-/* 🎨 Animated Gradient Background */
-html, body, [data-testid="stApp"] {
-    height: 100%;
-    background: linear-gradient(-45deg, #1e3c72, #2a5298, #0f2027, #2c5364);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
-}
+    /* 🌈 Animated Gradient Background */
+    [data-testid="stApp"] {
+        background: linear-gradient(-45deg, #1e3c72, #2a5298, #0f2027, #2c5364);
+        background-size: 400% 400%;
+        animation: gradientBG 15s ease infinite;
+        height: 100%;
+    }
 
-@keyframes gradientBG {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
-}
+    @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
 
-/* 🧊 Glassmorphism Cards */
-.stMarkdown, .stButton>button, .stSelectbox, .stTextInput>div, .stTabs [role="tablist"] {
-    background-color: rgba(255, 255, 255, 0.08) !important;
-    border-radius: 16px !important;
-    padding: 12px !important;
-    color: #fff !important;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: none !important;
-}
+    /* 🎯 Fix TAB container specifically */
+    [data-testid="stHorizontalBlock"] > div:first-child {
+        background-color: rgba(255, 255, 255, 0.05) !important;
+        border-radius: 16px;
+        box-shadow: none !important;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        padding: 1rem;
+        margin-bottom: 1rem;
+        overflow: visible !important;
+    }
 
-/* 🧪 Fix Button Hover & Text Color */
-.stButton>button {
-    color: white !important;
-    border: none;
-    background: linear-gradient(135deg, #00C6FF 0%, #0072FF 100%);
-    transition: 0.3s ease all;
-    font-weight: 500;
-}
+    /* 🧼 Tab list fix */
+    .stTabs [role="tablist"] {
+        overflow-x: auto;
+        background-color: transparent !important;
+        scrollbar-width: none;
+    }
 
-.stButton>button:hover {
-    background: linear-gradient(135deg, #0072FF 0%, #00C6FF 100%);
-    color: white !important;
-    scale: 1.03;
-}
+    .stTabs [role="tablist"]::-webkit-scrollbar {
+        display: none;
+    }
 
-/* 🧼 Remove Tab Shadow Overflow on Mobile */
-.stTabs [role="tablist"] {
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    background: rgba(255,255,255,0.05);
-}
+    /* Tab items */
+    .stTabs [role="tab"] {
+        color: #fff;
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-weight: 500;
+        white-space: nowrap;
+        background: rgba(255, 255, 255, 0.08);
+    }
 
-.stTabs [role="tablist"]::-webkit-scrollbar {
-    display: none;
-}
+    .stTabs [aria-selected="true"] {
+        background: rgba(255, 255, 255, 0.15);
+        border-bottom: 2px solid #fff !important;
+        color: #fff !important;
+    }
 
-.stTabs [role="tablist"]::after {
-    display: none !important;
-}
+    /* 🟦 Button hover */
+    .stButton>button {
+        color: #fff;
+        font-weight: 500;
+        border-radius: 8px;
+        padding: 0.6rem 1.2rem;
+        border: none;
+        background: linear-gradient(to right, #00c6ff, #0072ff);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .stButton>button:hover {
+        background: linear-gradient(to right, #0072ff, #00c6ff);
+        color: #fff;
+        transform: scale(1.03);
+    }
+
+    /* ✨ Inputs and Dropdowns */
+    .stSelectbox, .stTextInput>div, .stMarkdown {
+        background-color: rgba(255, 255, 255, 0.06) !important;
+        border-radius: 12px;
+        color: white !important;
+        backdrop-filter: blur(6px);
+        padding: 1rem;
+    }
+
+    .stSelectbox label, .stSelectbox div, .stTextInput input {
+        color: #fff !important;
+    }
 </style>
-""", unsafe_allow_html=True)
-
-
-
-
 """, unsafe_allow_html=True)
 
 
