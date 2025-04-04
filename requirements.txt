@@ -1,0 +1,7 @@
+streamlit==1.34.0
+google-generativeai
+python-dotenv
+requests
+pandas
+numpy
+beautifulsoup4
