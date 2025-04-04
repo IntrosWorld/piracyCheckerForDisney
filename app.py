@@ -166,82 +166,74 @@ with tab1:
 # ───────────────────────────────────────────────────── #
 # 🌍 WEB TAB
 # 🌍 WEB TAB
-import streamlit as st
-import json
+with tab2:
+    st.subheader("🌐 Web Search Settings")
+    num_web = st.selectbox(
+        "How many results per Web query?",
+        options=[1, 2, 5, 10],
+        index=2  # Default to 10 results
+    )
 
-def search_piracy_links(query, num_results=10):
-    # Function to simulate the search query and return a list of results
-    # In a real scenario, this would interface with an actual web search API
-    return [{"title": f"Result {i+1}", "link": f"https://example.com/{i+1}", "snippet": f"Snippet for result {i+1}"} for i in range(num_results)]
+    if st.button("🌍 Scan General Web for Pirated Links"):
+        st.success("Scanning the general web for suspicious content...")
 
-def analyze_webpage_with_gemini(link):
-    # Simulated analysis result from Gemini API
-    return '{"is_pirated": false, "confidence": 95, "reason": "Content appears to be legitimate."}'
+        duckduck_queries = [
+            "frozen movie 480p mkv file download",
+            "disney frozen full movie mp4 google drive",
+            "frozen full movie index of mkv",
+            "watch frozen movie free streaming site",
+            "disney frozen 1080p DDL download link"
+        ]
 
-# Main Streamlit Interface
-st.subheader("🌐 Web Search Settings")
-num_web = st.selectbox(
-    "How many results per Web query?",
-    options=[1, 2, 5, 10],
-    index=2  # Default to 10 results
-)
+        for query in duckduck_queries:
+            st.subheader(f"🔎 `{query}`")
+            results = search_piracy_links(query, num_results=num_web)  # Use num_web to control results count
+            results = [r for r in results if "reddit.com" not in r["link"]]  # Filter out Reddit links
 
-if st.button("🌍 Scan General Web for Pirated Links"):
-    st.success("Scanning the general web for suspicious content...")
+            if not results:
+                st.warning("❌ No non-reddit results found.")
+                continue
 
-    duckduck_queries = [
-        "frozen movie 480p mkv file download",
-        "disney frozen full movie mp4 google drive",
-        "frozen full movie index of mkv",
-        "watch frozen movie free streaming site",
-        "disney frozen 1080p DDL download link"
-    ]
+            # Limit the results to the selected number (num_web)
+            results_to_show = results[:num_web]
 
-    for query in duckduck_queries:
-        st.subheader(f"🔎 `{query}`")
-        results = search_piracy_links(query, num_results=num_web)
-        results = [r for r in results if "reddit.com" not in r["link"]]
+            for result in results_to_show:
+                title = result["title"]
+                link = result["link"]
+                snippet = result["snippet"]
 
-        if not results:
-            st.warning("❌ No non-reddit results found.")
-            continue
+                st.markdown(f"🔗 **[{title}]({link})**")
+                st.write(f"📝 {snippet}")
 
-        for result in results:
-            title = result["title"]
-            link = result["link"]
-            snippet = result["snippet"]
+                with st.spinner("🤖 Analyzing with Gemini..."):
+                    gemini_result = analyze_webpage_with_gemini(link)
 
-            st.markdown(f"🔗 **[{title}]({link})**")
-            st.write(f"📝 {snippet}")
+                st.markdown("#### 🤖 Gemini Webpage Analysis")
 
-            with st.spinner("🤖 Analyzing with Gemini..."):
-                gemini_result = analyze_webpage_with_gemini(link)
+                try:
+                    cleaned = gemini_result.strip().replace("```json", "").replace("```", "").replace('\\"', '"')
+                    parsed = json.loads(cleaned)
 
-            st.markdown("#### 🤖 Gemini Webpage Analysis")
+                    is_pirated = parsed.get("is_pirated", False)
+                    confidence = parsed.get("confidence", 0)
+                    reason = parsed.get("reason", "N/A")
 
-            try:
-                cleaned = gemini_result.strip().replace("```json", "").replace("```", "").replace('\\"', '"')
-                parsed = json.loads(cleaned)
+                    st.markdown("**📋 Extracted Gemini Analysis:**")
+                    st.markdown(f"""
+- 🔍 **Is Pirated:** `{is_pirated}`
+- 📊 **Confidence:** `{confidence}%`
+- 💬 **Reason:** _{reason}_
+""")
 
-                is_pirated = parsed.get("is_pirated", False)
-                confidence = parsed.get("confidence", 0)
-                reason = parsed.get("reason", "N/A")
+                    if is_pirated:
+                        st.error("🚫 Piracy Likely Detected!")
+                    else:
+                        st.success("✅ Looks Clean (Not Pirated)")
 
-                st.markdown("**📋 Extracted Gemini Analysis:**")
-                st.markdown(f"""
-    - 🔍 **Is Pirated:** `{is_pirated}`
-    - 📊 **Confidence:** `{confidence}%`
-    - 💬 **Reason:** _{reason}_
-    """)
+                except Exception:
+                    st.warning("⚠️ Could not parse Gemini's response.")
+                    st.code(gemini_result, language="json")
 
-                if is_pirated:
-                    st.error("🚫 Piracy Likely Detected!")
-                else:
-                    st.success("✅ Looks Clean (Not Pirated)")
+            st.markdown("---")
 
-            except Exception:
-                st.warning("⚠️ Could not parse Gemini's response.")
-                st.code(gemini_result, language="json")
-
-        st.markdown("---")
 
