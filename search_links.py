@@ -4,8 +4,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-API_KEY = os.getenv("GOOGLE_API_KEY")
-CSE_ID = os.getenv("CSE_ID")
+API_KEY = st.secrets("GOOGLE_API_KEY")
+CSE_ID = st.secrets("CSE_ID")
 
 def search_piracy_links(query, num_results=10):
     url = f"https://www.googleapis.com/customsearch/v1"
