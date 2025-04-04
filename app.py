@@ -48,11 +48,11 @@ st.markdown("""
         font-weight: 600;
     }
 
-   /* ---- Button Styling ---- */
-.stButton>button {
+  /* ---- Button Styling ---- */
+.stButton > button {
     background-color: #00c6ff;
     background-image: linear-gradient(to right, #0072ff, #00c6ff);
-    color: white;
+    color: white !important;                /* <-- Force white text */
     border: none;
     padding: 10px 20px;
     border-radius: 12px;
@@ -62,11 +62,14 @@ st.markdown("""
     box-shadow: 0px 4px 12px rgba(0, 198, 255, 0.4);
 }
 
-.stButton>button:hover {
-    background-image: linear-gradient(to right, #8e2de2, #4a00e0); /* 💜 Purple vibe */
+/* 👇 On Hover */
+.stButton > button:hover {
+    background-image: linear-gradient(to right, #8e2de2, #4a00e0);  /* Purple gradient */
     transform: scale(1.04);
     box-shadow: 0px 6px 15px rgba(142, 45, 226, 0.6);
+    color: white !important;               /* <-- Ensure white text stays on hover */
 }
+
 
 
     /* ---- Success/Error/Warning Boxes ---- */
