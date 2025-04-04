@@ -105,47 +105,8 @@ st.markdown("""
     .stSelectbox label, .stSelectbox div, .stTextInput input {
         color: #fff !important;
     }
-    /* mobile */
-@media only screen and (max-width: 768px) {
-    .stTabs [role="tablist"] {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 12px;
-        background: none !important;
-        padding: 0 !important;
-        box-shadow: none !important;
-        border-radius: 0 !important;
-    }
-
-    .stTabs [role="tab"] {
-        background: linear-gradient(to right, #00c6ff, #0072ff);
-        border: none !important;
-        border-radius: 12px !important;
-        padding: 14px 0 !important;
-        width: 100% !important;
-        text-align: center;
-        font-weight: 600;
-        font-size: 16px;
-        color: white !important;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
-        transition: all 0.3s ease;
-    }
-
-    .stTabs [role="tab"]:hover {
-        transform: scale(1.03);
-    }
-
-    .stTabs [aria-selected="true"] {
-        background: linear-gradient(to right, #0072ff, #00c6ff) !important;
-        color: white !important;
-    }
-}
-
 </style>
 """, unsafe_allow_html=True)
-
-
-
 
 
 
