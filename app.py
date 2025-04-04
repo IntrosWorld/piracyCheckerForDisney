@@ -70,13 +70,11 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+from gemini_utils import is_disney_content, analyze_webpage_with_gemini, test_gemini_api
+
 if st.button("🚀 Test Gemini API"):
-    prompt = "Respond with a JSON: {\"status\": \"Gemini is working fine!\"}"
-    try:
-        response = model.generate_content(prompt)
-        st.code(response.text, language="json")
-    except Exception as e:
-        st.error(f"❌ Gemini failed: {e}")
+    st.code(test_gemini_api(), language="json")
+
 
 
 
