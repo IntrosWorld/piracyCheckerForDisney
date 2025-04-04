@@ -3,6 +3,34 @@ import requests
 from urllib.parse import urlparse, parse_qs
 import google.generativeai as genai  # ✅ Correct import
 import streamlit as st
+import json  # Add this import at the top of your file
+
+def fetch_video_details(video_id):
+    url = f"https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id={video_id}&key={YOUTUBE_API_KEY}"
+    video_response = requests.get(url).json()
+
+    # Debug: Print raw API response for inspection
+    print("Raw video API response:", json.dumps(video_response, indent=2))
+
+    if "items" not in video_response or not video_response["items"]:
+        return "", "", "", False, "0", "0", "0"
+
+    item = video_response["items"][0]
+    snippet = item["snippet"]
+    statistics = item["statistics"]
+    channel_id = snippet.get("channelId", "")
+    channel_title = snippet.get("channelTitle", "")
+
+    # Fetch channel stats
+    channel_url = f"https://www.googleapis.com/youtube/v3/channels?part=statistics&id={channel_id}&key={YOUTUBE_API_KEY}"
+    channel_response = requests.get(channel_url).json()
+
+    # Debug: Print raw channel API response
+    print("Raw channel API response:", json.dumps(channel_response, indent=2))
+
+    subscriber_count = "0"
+    if "
+
 
 # ✅ Load API keys
 api_key = st.secrets["GEMINI_API_KEY"]
