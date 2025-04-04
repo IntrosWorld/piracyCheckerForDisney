@@ -2,7 +2,6 @@ import streamlit as st
 import re
 import json
 
-
 from gemini_utils import is_disney_content, analyze_webpage_with_gemini
 from youtube_analysis import (
     extract_video_id,
@@ -13,6 +12,65 @@ from youtube_analysis import (
 from search_links import search_piracy_links
 
 st.set_page_config(page_title="🎬 Safeguarding Stories", layout="wide")
+
+# 🌈 Inject Gradient Background
+st.markdown("""
+    <style>
+    body {
+        background: linear-gradient(-45deg, #1e3c72, #2a5298, #1e3c72, #2a5298);
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+        color: white;
+    }
+
+    @keyframes gradient {
+        0% {background-position: 0% 50%;}
+        50% {background-position: 100% 50%;}
+        100% {background-position: 0% 50%;}
+    }
+
+    .stMarkdown, .stButton>button, .stSelectbox {
+        background-color: rgba(0, 0, 0, 0.15);
+        border-radius: 12px;
+        padding: 10px;
+    }
+
+    h1, h2, h3, h4, .stTextInput>label {
+        color: white;
+    }
+
+    .stAlert {
+        background-color: rgba(0, 0, 0, 0.3) !important;
+        border-radius: 10px;
+    }
+
+    .stButton>button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 16px;
+        border-radius: 10px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .stButton>button:hover {
+        background-color: #66bb6a;
+    }
+
+    .stTabs [role="tablist"] {
+        background-color: #111;
+        border-radius: 10px;
+    }
+
+    .stTabs [role="tab"] {
+        color: white;
+    }
+
+    </style>
+""", unsafe_allow_html=True)
+
+
 
 st.title("🛡️ Safeguarding Stories – Disney IP Protection System")
 
