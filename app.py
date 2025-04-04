@@ -16,48 +16,82 @@ st.set_page_config(page_title="🎬 Safeguarding Stories", layout="wide")
 # 🌈 Inject Gradient Background
 # 💫 Full Gradient Background & Modern Glassmorphism UI
 st.markdown("""
-   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-    html, body, [class*="css"]  {
-        font-family: 'Poppins', sans-serif;
-    }
-    /* ---- Animated Gradient Background ---- */
-    html, body, [data-testid="stApp"] {
-        height: 100%;
-        background: linear-gradient(-45deg, #1e3c72, #2a5298, #0f2027, #2c5364);
-        background-size: 400% 400%;
-        animation: gradientBG 15s ease infinite;
-        font-family: 'Segoe UI', sans-serif;
-    }
+/* ---- Base Font ---- */
+html, body, [class*="css"] {
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+}
 
-    @keyframes gradientBG {
-        0% {background-position: 0% 50%;}
-        50% {background-position: 100% 50%;}
-        100% {background-position: 0% 50%;}
-    }
+/* ---- Animated Gradient Background ---- */
+html, body, [data-testid="stApp"] {
+    height: 100%;
+    background: linear-gradient(-45deg, #1e3c72, #2a5298, #0f2027, #2c5364);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
 
-    /* ---- Transparent UI Glass Cards ---- */
-    .stMarkdown, .stButton>button, .stSelectbox, .stTextInput>div, .stTabs [role="tablist"] {
-        background-color: rgba(255, 255, 255, 0.08) !important;
-        border-radius: 16px !important;
-        padding: 12px !important;
-        color: #fff;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-    }
+@keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
 
-    /* ---- Headings and labels ---- */
-    h1, h2, h3, h4, h5, h6, label, .css-10trblm, .stTabs [role="tab"] {
-        color: #ffffff !important;
-        font-weight: 600;
-    }
+/* ---- Glass UI Elements ---- */
+.stMarkdown, .stSelectbox, .stTextInput>div {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    border-radius: 16px !important;
+    padding: 12px !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #fff !important;
+}
 
-  /* ---- Button Styling ---- */
+/* ---- Tab Bar Specific Fix ---- */
+.stTabs [role="tablist"] {
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    border-radius: 12px !important;
+    padding: 8px 12px !important;
+    margin-bottom: 20px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: none !important;
+    overflow-x: auto !important;
+    white-space: nowrap;
+}
+
+/* ---- Tab Buttons ---- */
+.stTabs [role="tab"] {
+    color: #fff !important;
+    font-weight: 500;
+    padding: 6px 16px;
+    margin-right: 6px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.stTabs [role="tab"]:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.stTabs [role="tab"][aria-selected="true"] {
+    background: rgba(255, 255, 255, 0.15);
+    border-bottom: 2px solid white;
+}
+
+/* ---- Headings and Labels ---- */
+h1, h2, h3, h4, h5, h6, label, .css-10trblm {
+    color: #ffffff !important;
+    font-weight: 600;
+}
+
+/* ---- Button Styling ---- */
 .stButton > button {
     background-color: #00c6ff;
     background-image: linear-gradient(to right, #0072ff, #00c6ff);
-    color: white !important;                /* <-- Force white text */
+    color: white !important;
     border: none;
     padding: 10px 20px;
     border-radius: 12px;
@@ -67,32 +101,30 @@ st.markdown("""
     box-shadow: 0px 4px 12px rgba(0, 198, 255, 0.4);
 }
 
-/* 👇 On Hover */
+/* 👇 Hover Button */
 .stButton > button:hover {
-    background-image: linear-gradient(to right, #8e2de2, #4a00e0);  /* Purple gradient */
+    background-image: linear-gradient(to right, #00c6ff, #0072ff); /* Blue shade on hover */
     transform: scale(1.04);
-    box-shadow: 0px 6px 15px rgba(142, 45, 226, 0.6);
-    color: white !important;               /* <-- Ensure white text stays on hover */
+    box-shadow: 0px 6px 15px rgba(0, 198, 255, 0.6);
+    color: white !important;
 }
 
+/* ---- Success, Error, Warning Boxes ---- */
+.stAlert {
+    border-radius: 12px !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+    font-weight: 500;
+    backdrop-filter: blur(10px);
+}
 
+/* ---- Video + Expander Panels ---- */
+.element-container iframe, .stExpander {
+    border-radius: 12px;
+    overflow: hidden;
+}
+</style>
 
-    /* ---- Success/Error/Warning Boxes ---- */
-    .stAlert {
-        border-radius: 12px !important;
-        background-color: rgba(255, 255, 255, 0.1) !important;
-        color: #fff !important;
-        font-weight: 500;
-        backdrop-filter: blur(10px);
-    }
-
-    /* ---- Video + Expander Panels ---- */
-    .element-container iframe, .stExpander {
-        border-radius: 12px;
-        overflow: hidden;
-    }
-
-    </style>
 """, unsafe_allow_html=True)
 
 
