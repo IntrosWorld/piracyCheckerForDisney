@@ -14,140 +14,61 @@ from search_links import search_piracy_links
 st.set_page_config(page_title="🎬 Safeguarding Stories", layout="wide")
 
 # 🌈 Inject Gradient Background
-# 💫 Full Gradient Background & Modern Glassmorphism UI
 st.markdown("""
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
-    html, body, [class*="css"] {
-        font-family: 'Poppins', sans-serif;
-    }
-
-    /* 🌈 Animated Gradient Background */
-    [data-testid="stApp"] {
-        background: linear-gradient(-45deg, #1e3c72, #2a5298, #0f2027, #2c5364);
+    <style>
+    body {
+        background: linear-gradient(-45deg, #1e3c72, #2a5298, #1e3c72, #2a5298);
         background-size: 400% 400%;
-        animation: gradientBG 15s ease infinite;
-        height: 100%;
+        animation: gradient 15s ease infinite;
+        color: white;
     }
 
-    @keyframes gradientBG {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+    @keyframes gradient {
+        0% {background-position: 0% 50%;}
+        50% {background-position: 100% 50%;}
+        100% {background-position: 0% 50%;}
     }
 
-    /* 🎯 Fix TAB container specifically */
-    [data-testid="stHorizontalBlock"] > div:first-child {
-        background-color: rgba(255, 255, 255, 0.05) !important;
-        border-radius: 16px;
-        box-shadow: none !important;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        padding: 1rem;
-        margin-bottom: 1rem;
-        overflow: visible !important;
+    .stMarkdown, .stButton>button, .stSelectbox {
+        background-color: rgba(0, 0, 0, 0.15);
+        border-radius: 12px;
+        padding: 10px;
     }
 
-    /* 🧼 Tab list fix */
-    .stTabs [role="tablist"] {
-        overflow-x: auto;
-        background-color: transparent !important;
-        scrollbar-width: none;
+    h1, h2, h3, h4, .stTextInput>label {
+        color: white;
     }
 
-    .stTabs [role="tablist"]::-webkit-scrollbar {
-        display: none;
+    .stAlert {
+        background-color: rgba(0, 0, 0, 0.3) !important;
+        border-radius: 10px;
     }
 
-    /* Tab items */
-    .stTabs [role="tab"] {
-        color: #fff;
-        padding: 8px 16px;
-        border-radius: 8px;
-        font-weight: 500;
-        white-space: nowrap;
-        background: rgba(255, 255, 255, 0.08);
-    }
-
-    .stTabs [aria-selected="true"] {
-        background: rgba(255, 255, 255, 0.15);
-        border-bottom: 2px solid #fff !important;
-        color: #fff !important;
-    }
-
-    /* 🟦 Button hover */
     .stButton>button {
-        color: #fff;
-        font-weight: 500;
-        border-radius: 8px;
-        padding: 0.6rem 1.2rem;
+        background-color: #4CAF50;
+        color: white;
         border: none;
-        background: linear-gradient(to right, #00c6ff, #0072ff);
-        transition: all 0.3s ease-in-out;
+        padding: 10px 16px;
+        border-radius: 10px;
+        font-weight: bold;
+        transition: 0.3s;
     }
 
     .stButton>button:hover {
-        background: linear-gradient(to right, #0072ff, #00c6ff);
-        color: #fff;
-        transform: scale(1.03);
+        background-color: #66bb6a;
     }
 
-    /* ✨ Inputs and Dropdowns */
-    .stSelectbox, .stTextInput>div, .stMarkdown {
-        background-color: rgba(255, 255, 255, 0.06) !important;
-        border-radius: 12px;
-        color: white !important;
-        backdrop-filter: blur(6px);
-        padding: 1rem;
-    }
-
-    .stSelectbox label, .stSelectbox div, .stTextInput input {
-        color: #fff !important;
-    }
-    /* mobile */
-@media only screen and (max-width: 768px) {
     .stTabs [role="tablist"] {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 12px;
-        background: none !important;
-        padding: 0 !important;
-        box-shadow: none !important;
-        border-radius: 0 !important;
+        background-color: #111;
+        border-radius: 10px;
     }
 
     .stTabs [role="tab"] {
-        background: linear-gradient(to right, #00c6ff, #0072ff);
-        border: none !important;
-        border-radius: 12px !important;
-        padding: 14px 0 !important;
-        width: 100% !important;
-        text-align: center;
-        font-weight: 600;
-        font-size: 16px;
-        color: white !important;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
-        transition: all 0.3s ease;
+        color: white;
     }
 
-    .stTabs [role="tab"]:hover {
-        transform: scale(1.03);
-    }
-
-    .stTabs [aria-selected="true"] {
-        background: linear-gradient(to right, #0072ff, #00c6ff) !important;
-        color: white !important;
-    }
-}
-
-
-</style>
+    </style>
 """, unsafe_allow_html=True)
-
-
-
-
 
 
 
