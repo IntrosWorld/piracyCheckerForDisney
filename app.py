@@ -70,6 +70,15 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+if st.button("🚀 Test Gemini API"):
+    prompt = "Respond with a JSON: {\"status\": \"Gemini is working fine!\"}"
+    try:
+        response = model.generate_content(prompt)
+        st.code(response.text, language="json")
+    except Exception as e:
+        st.error(f"❌ Gemini failed: {e}")
+
+
 
 
 st.title("🛡️ Safeguarding Stories – Disney IP Protection System")
