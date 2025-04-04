@@ -95,6 +95,16 @@ with tab1:
         index=2
     )
 
+    video_url = st.text_input("Enter YouTube Video URL:")
+
+    # When a URL is entered, display the video ID
+    if video_url:
+        video_id = extract_video_id(video_url)
+        if video_id:
+            st.write(f"Extracted Video ID: {video_id}")
+        else:
+            st.warning("⚠️ Invalid YouTube URL")
+
     if st.button("🔍 Scan YouTube for Pirated Videos"):
         st.success("Scanning YouTube and analyzing content using Gemini...")
 
