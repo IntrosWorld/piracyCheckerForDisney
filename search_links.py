@@ -6,7 +6,11 @@ def search_piracy_links(query, num_results=5):
 
     try:
         with DDGS() as ddgs:
-            raw_results = ddgs.text(query, max_results=num_results)
+            raw_results = ddgs.text(
+                query,
+                max_results=num_results,
+                safesearch="off"  # 👈 turn off safe search
+            )
             for item in raw_results:
                 results.append({
                     "title": item.get("title", ""),
