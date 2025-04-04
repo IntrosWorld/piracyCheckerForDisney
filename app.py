@@ -15,7 +15,6 @@ st.set_page_config(page_title="🎬 Safeguarding Stories", layout="wide")
 
 # 🌈 Inject Gradient Background
 # 💫 Full Gradient Background & Modern Glassmorphism UI
-you know there  are muitpler card. the prpnelm is only happening for cad wihc ocntains tabs. show try to fi xthsat brsauder other csrc dont hsvre thid prbolem
 st.markdown("""
 <style>
 /* Import Poppins Font */
