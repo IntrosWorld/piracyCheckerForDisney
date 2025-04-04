@@ -171,7 +171,7 @@ with tab2:
     num_web = st.selectbox(
         "How many results per Web query?",
         options=[1, 2, 5, 10],
-        index=2  # Default to 10 results
+        index=2
     )
 
     if st.button("🌍 Scan General Web for Pirated Links"):
@@ -187,17 +187,14 @@ with tab2:
 
         for query in duckduck_queries:
             st.subheader(f"🔎 `{query}`")
-            results = search_piracy_links(query, num_results=num_web)  # Use num_web to control results count
-            results = [r for r in results if "reddit.com" not in r["link"]]  # Filter out Reddit links
+            results = search_piracy_links(query, num_results=num_web)
+            results = [r for r in results if "reddit.com" not in r["link"]]
 
             if not results:
                 st.warning("❌ No non-reddit results found.")
                 continue
 
-            # Limit the results to the selected number (num_web)
-            results_to_show = results[:num_web]
-
-            for result in results_to_show:
+            for result in results:
                 title = result["title"]
                 link = result["link"]
                 snippet = result["snippet"]
@@ -235,5 +232,3 @@ with tab2:
                     st.code(gemini_result, language="json")
 
             st.markdown("---")
-
-
