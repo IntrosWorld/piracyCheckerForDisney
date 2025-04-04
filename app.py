@@ -48,23 +48,26 @@ st.markdown("""
         font-weight: 600;
     }
 
-    /* ---- Button Styling ---- */
-    .stButton>button {
-        background-color: #00c6ff;
-        background-image: linear-gradient(to right, #0072ff, #00c6ff);
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 12px;
-        font-size: 16px;
-        font-weight: bold;
-        transition: 0.3s ease-in-out;
-    }
+   /* ---- Button Styling ---- */
+.stButton>button {
+    background-color: #00c6ff;
+    background-image: linear-gradient(to right, #0072ff, #00c6ff);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0px 4px 12px rgba(0, 198, 255, 0.4);
+}
 
-    .stButton>button:hover {
-        background-image: linear-gradient(to right, #00c6ff, #0072ff);
-        transform: scale(1.02);
-    }
+.stButton>button:hover {
+    background-image: linear-gradient(to right, #8e2de2, #4a00e0); /* 💜 Purple vibe */
+    transform: scale(1.04);
+    box-shadow: 0px 6px 15px rgba(142, 45, 226, 0.6);
+}
+
 
     /* ---- Success/Error/Warning Boxes ---- */
     .stAlert {
