@@ -158,6 +158,7 @@ with tab1:
 
 # ───────────────────────────────────────────────────── #
 # 🌍 WEB TAB
+# 🌍 WEB TAB
 with tab2:
     st.subheader("🌐 Web Search Settings")
     num_web = st.selectbox(
@@ -169,14 +170,15 @@ with tab2:
     if st.button("🌍 Scan General Web for Pirated Links"):
         st.success("Scanning the general web for suspicious content...")
 
-        general_queries = [
-            "disney free movie download",
-            "watch disney movies online free",
-            "frozen movie 480p download",
-            "frozen full movie watch online"
+        duckduck_queries = [
+            "frozen movie 480p mkv file download",
+            "disney frozen full movie mp4 google drive",
+            "frozen full movie index of mkv",
+            "watch frozen movie free streaming site",
+            "disney frozen 1080p DDL download link"
         ]
 
-        for query in general_queries:
+        for query in duckduck_queries:
             st.subheader(f"🔎 `{query}`")
             results = search_piracy_links(query, num_results=num_web)
             results = [r for r in results if "reddit.com" not in r["link"]]
