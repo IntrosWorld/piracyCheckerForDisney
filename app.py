@@ -105,8 +105,14 @@ st.markdown("""
     .stSelectbox label, .stSelectbox div, .stTextInput input {
         color: #fff !important;
     }
+    /* mobile */
+st.markdown("""<style> ... </style>""", unsafe_allow_html=True)
+
 </style>
 """, unsafe_allow_html=True)
+
+
+
 
 
 
