@@ -17,72 +17,65 @@ st.set_page_config(page_title="🎬 Safeguarding Stories", layout="wide")
 # 💫 Full Gradient Background & Modern Glassmorphism UI
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+/* Import Poppins Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-    html, body, [class*="css"] {
-        font-family: 'Poppins', sans-serif;
-    }
+/* Global Font + Background */
+html, body, [class*="css"] {
+    font-family: 'Poppins', sans-serif;
+}
+[data-testid="stApp"] {
+    background: linear-gradient(-45deg, #1e3c72, #2a5298, #0f2027, #2c5364);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+@keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
 
-    /* Background gradient animation */
-    [data-testid="stApp"] {
-        background: linear-gradient(-45deg, #1e3c72, #2a5298, #0f2027, #2c5364);
-        background-size: 400% 400%;
-        animation: gradientBG 15s ease infinite;
-        height: 100%;
-    }
+/* Fix Tabs for Mobile */
+.stTabs [role="tablist"] {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    background: rgba(255,255,255,0.05);
+    border-radius: 12px;
+    padding: 10px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+.stTabs [role="tablist"]::-webkit-scrollbar {
+    display: none;
+}
+.stTabs [role="tab"] {
+    color: white !important;
+    font-weight: 600;
+    padding: 10px 18px;
+    margin: 5px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    transition: background 0.3s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.stTabs [role="tab"]:hover {
+    background: rgba(255,255,255,0.15);
+}
+.stTabs [role="tab"][aria-selected="true"] {
+    background: #00aaff;
+    color: white !important;
+    box-shadow: 0 2px 10px rgba(0,170,255,0.3);
+    border-bottom: none !important;
+}
 
-    @keyframes gradientBG {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-
-    /* Remove weird shadows or borders on mobile tabs */
+/* Optional: Center tabs */
+@media screen and (max-width: 768px) {
     .stTabs [role="tablist"] {
-        background-color: rgba(255, 255, 255, 0.08) !important;
-        border-radius: 12px !important;
-        overflow-x: auto;
-        box-shadow: none !important;
-        padding: 8px;
-        margin-bottom: 20px;
+        justify-content: flex-start;
     }
-
-    /* Each tab item */
-    .stTabs [role="tab"] {
-        color: #fff;
-        padding: 8px 16px;
-        border-radius: 8px;
-        font-weight: 500;
-        white-space: nowrap;
-    }
-
-    /* Active tab */
-    .stTabs [aria-selected="true"] {
-        background: rgba(255, 255, 255, 0.15) !important;
-        border-bottom: 2px solid #fff !important;
-        color: #fff !important;
-    }
-
-    /* Fix button hover/text color */
-    .stButton>button:hover {
-        background-color: #6c63ff !important;
-        color: #fff !important;
-        transition: 0.3s ease;
-    }
-
-    /* Transparent input cards */
-    .stMarkdown, .stSelectbox, .stTextInput>div {
-        background-color: rgba(255, 255, 255, 0.05) !important;
-        border-radius: 12px !important;
-        color: #fff;
-        padding: 12px;
-        backdrop-filter: blur(6px);
-    }
-
-    /* Force white text for dropdowns/inputs */
-    .stSelectbox label, .stSelectbox div, .stTextInput input {
-        color: #fff !important;
-    }
+}
 </style>
 """, unsafe_allow_html=True)
 
