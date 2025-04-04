@@ -2,9 +2,8 @@ import streamlit as st
 import re
 import json
 
-from fetcher import get_mock_video_data
+
 from gemini_utils import is_disney_content, analyze_webpage_with_gemini
-from takedown import generate_takedown_notice
 from youtube_analysis import (
     extract_video_id,
     fetch_video_details,
