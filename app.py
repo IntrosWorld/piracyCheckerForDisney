@@ -95,13 +95,26 @@ with tab1:
         index=2
     )
 
+        # Add a text input field to enter the YouTube video URL
     video_url = st.text_input("Enter YouTube Video URL:")
 
-    # When a URL is entered, display the video ID
+    # When a URL is entered, display the video ID and additional details
     if video_url:
         video_id = extract_video_id(video_url)
         if video_id:
             st.write(f"Extracted Video ID: {video_id}")
+            
+            # Fetch video details using the video ID
+            yt_title, description, channel_name, is_verified, views, likes, subscribers = fetch_video_details(video_id)
+
+            # Display video details
+            st.write(f"**Video Title:** {yt_title}")
+            st.write(f"**Description:** {description}")
+            st.write(f"**Channel Name:** {channel_name}")
+            st.write(f"**Verified Channel:** {'Yes' if is_verified else 'No'}")
+            st.write(f"**Views:** {views}")
+            st.write(f"**Likes:** {likes}")
+            st.write(f"**Subscribers:** {subscribers}")
         else:
             st.warning("⚠️ Invalid YouTube URL")
 
