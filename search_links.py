@@ -1,39 +1,38 @@
-import os
 import requests
-from dotenv import load_dotenv
 import streamlit as st
 
-# Load .env variables locally (only works locally, not in Streamlit Cloud)
-load_dotenv()
-
-# Load secrets (these must be added in Streamlit Cloud secrets too)
-API_KEY = st.secrets.get("GOOGLE_API_KEY", os.getenv("GOOGLE_API_KEY"))
-CSE_ID = st.secrets.get("CSE_ID", os.getenv("CSE_ID"))
-
 def search_piracy_links(query, num_results=10):
-    """Searches Google Custom Search Engine (CSE) for piracy-related links."""
-    url = "https://www.googleapis.com/customsearch/v1"
-    params = {
-        "key": API_KEY,
-        "cx": CSE_ID,
-        "q": query,
-        "num": num_results
-    }
-
-    try:
-        response = requests.get(url, params=params, timeout=10)
-        response.raise_for_status()  # Raise exception for HTTP errors
-        data = response.json()
-    except Exception as e:
-        st.error(f"❌ Error fetching results for `{query}`: {e}")
-        return []
-
+    """
+    Searches DuckDuckGo for piracy-related links using their unofficial Instant Answer API.
+    This version replaces the need for Google CSE.
+    """
     results = []
-    for item in data.get("items", []):
-        results.append({
-            "title": item.get("title"),
-            "link": item.get("link"),
-            "snippet": item.get("snippet", "")
-        })
+    try:
+        url = "https://api.duckduckgo.com/"
+        params = {
+            "q": query,
+            "format": "json",
+            "no_redirect": 1,
+            "no_html": 1,
+            "skip_disambig": 1
+        }
+
+        response = requests.get(url, params=params, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+
+        # Use RelatedTopics as fallback
+        related = data.get("RelatedTopics", [])[:num_results]
+
+        for item in related:
+            if isinstance(item, dict) and "Text" in item and "FirstURL" in item:
+                results.append({
+                    "title": item.get("Text"),
+                    "link": item.get("FirstURL"),
+                    "snippet": item.get("Text")
+                })
+
+    except Exception as e:
+        st.error(f"❌ Error fetching results for `{query}` from DuckDuckGo: {e}")
 
     return results
