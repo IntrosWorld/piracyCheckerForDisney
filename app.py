@@ -17,64 +17,67 @@ st.set_page_config(page_title="🎬 Safeguarding Stories", layout="wide")
 # 💫 Full Gradient Background & Modern Glassmorphism UI
 st.markdown("""
 <style>
-/* Import Poppins Font */
+/* 🌈 Import Poppins Font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-/* Global Font + Background */
 html, body, [class*="css"] {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif !important;
 }
-[data-testid="stApp"] {
+
+/* 🎨 Animated Gradient Background */
+html, body, [data-testid="stApp"] {
+    height: 100%;
     background: linear-gradient(-45deg, #1e3c72, #2a5298, #0f2027, #2c5364);
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
 }
+
 @keyframes gradientBG {
     0% {background-position: 0% 50%;}
     50% {background-position: 100% 50%;}
     100% {background-position: 0% 50%;}
 }
 
-/* Fix Tabs for Mobile */
+/* 🧊 Glassmorphism Cards */
+.stMarkdown, .stButton>button, .stSelectbox, .stTextInput>div, .stTabs [role="tablist"] {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    border-radius: 16px !important;
+    padding: 12px !important;
+    color: #fff !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: none !important;
+}
+
+/* 🧪 Fix Button Hover & Text Color */
+.stButton>button {
+    color: white !important;
+    border: none;
+    background: linear-gradient(135deg, #00C6FF 0%, #0072FF 100%);
+    transition: 0.3s ease all;
+    font-weight: 500;
+}
+
+.stButton>button:hover {
+    background: linear-gradient(135deg, #0072FF 0%, #00C6FF 100%);
+    color: white !important;
+    scale: 1.03;
+}
+
+/* 🧼 Remove Tab Shadow Overflow on Mobile */
 .stTabs [role="tablist"] {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    background: rgba(255,255,255,0.05);
-    border-radius: 12px;
-    padding: 10px;
     overflow-x: auto;
     scrollbar-width: none;
+    -ms-overflow-style: none;
+    background: rgba(255,255,255,0.05);
 }
+
 .stTabs [role="tablist"]::-webkit-scrollbar {
     display: none;
 }
-.stTabs [role="tab"] {
-    color: white !important;
-    font-weight: 600;
-    padding: 10px 18px;
-    margin: 5px;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.08);
-    transition: background 0.3s ease;
-    white-space: nowrap;
-    flex-shrink: 0;
-}
-.stTabs [role="tab"]:hover {
-    background: rgba(255,255,255,0.15);
-}
-.stTabs [role="tab"][aria-selected="true"] {
-    background: #00aaff;
-    color: white !important;
-    box-shadow: 0 2px 10px rgba(0,170,255,0.3);
-    border-bottom: none !important;
-}
 
-/* Optional: Center tabs */
-@media screen and (max-width: 768px) {
-    .stTabs [role="tablist"] {
-        justify-content: flex-start;
-    }
+.stTabs [role="tablist"]::after {
+    display: none !important;
 }
 </style>
 """, unsafe_allow_html=True)
