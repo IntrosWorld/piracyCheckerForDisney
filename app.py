@@ -16,22 +16,21 @@ st.set_page_config(page_title="🎬 Safeguarding Stories", layout="wide")
 # 🌈 Inject Gradient Background
 # 💫 Full Gradient Background & Modern Glassmorphism UI
 st.markdown("""
- <style>
-/* ------------------ 🌟 Fonts & Layout ------------------ */
+st.markdown("""
+<style>
+/* 🌈 Import Poppins Font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
 html, body, [class*="css"] {
     font-family: 'Poppins', sans-serif !important;
-    color: #ffffff;
 }
 
-/* ------------------ 🌌 Animated Gradient Background ------------------ */
+/* 🎨 Animated Gradient Background */
 html, body, [data-testid="stApp"] {
     height: 100%;
     background: linear-gradient(-45deg, #1e3c72, #2a5298, #0f2027, #2c5364);
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
-    font-family: 'Poppins', sans-serif;
 }
 
 @keyframes gradientBG {
@@ -40,84 +39,50 @@ html, body, [data-testid="stApp"] {
     100% {background-position: 0% 50%;}
 }
 
-/* ------------------ 🧊 Glassmorphism Cards ------------------ */
-.stMarkdown, .stButton > button, .stSelectbox, .stTextInput > div, .stTabs [role="tablist"], .stTabs [role="tab"] {
+/* 🧊 Glassmorphism Cards */
+.stMarkdown, .stButton>button, .stSelectbox, .stTextInput>div, .stTabs [role="tablist"] {
     background-color: rgba(255, 255, 255, 0.08) !important;
     border-radius: 16px !important;
-    padding: 10px !important;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    color: #ffffff !important;
+    padding: 12px !important;
+    color: #fff !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: none !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* ------------------ 🎛️ Tabs Styling ------------------ */
+/* 🧪 Fix Button Hover & Text Color */
+.stButton>button {
+    color: white !important;
+    border: none;
+    background: linear-gradient(135deg, #00C6FF 0%, #0072FF 100%);
+    transition: 0.3s ease all;
+    font-weight: 500;
+}
+
+.stButton>button:hover {
+    background: linear-gradient(135deg, #0072FF 0%, #00C6FF 100%);
+    color: white !important;
+    scale: 1.03;
+}
+
+/* 🧼 Remove Tab Shadow Overflow on Mobile */
 .stTabs [role="tablist"] {
-    display: flex;
-    flex-wrap: wrap;
     overflow-x: auto;
-    overflow-y: hidden;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    margin: 0;
-    border-radius: 12px;
+    background: rgba(255,255,255,0.05);
 }
 
 .stTabs [role="tablist"]::-webkit-scrollbar {
     display: none;
 }
 
-.stTabs [role="tab"] {
-    flex: 1 1 auto;
-    white-space: nowrap;
-    color: #fff !important;
-    font-weight: 500;
-    text-align: center;
-    border-radius: 8px;
-    padding: 10px 20px;
-    transition: background 0.3s ease;
-}
-
-.stTabs [role="tab"]:hover {
-    background-color: rgba(255, 255, 255, 0.15) !important;
-}
-
-.stTabs [role="tab"][aria-selected="true"] {
-    background: rgba(255, 255, 255, 0.2);
-    border-bottom: 2px solid #00c6ff;
-}
-
-/* ------------------ 🔘 Buttons ------------------ */
-.stButton > button {
-    background: linear-gradient(to right, #00c6ff, #0072ff) !important;
-    color: #fff !important;
-    font-weight: 600 !important;
-    transition: all 0.3s ease;
-    border: none;
-}
-
-.stButton > button:hover {
-    background: linear-gradient(to right, #0099cc, #0052cc) !important;
-    transform: translateY(-1px);
-}
-
-/* ------------------ 📱 Mobile Font Adjustments ------------------ */
-@media screen and (max-width: 768px) {
-    .stTabs [role="tab"] {
-        font-size: 14px;
-        padding: 8px 14px;
-    }
-
-    h1, h2, h3 {
-        font-size: 1.2rem !important;
-    }
-
-    .stMarkdown {
-        padding: 8px !important;
-    }
+.stTabs [role="tablist"]::after {
+    display: none !important;
 }
 </style>
+""", unsafe_allow_html=True)
+
 
 
 
