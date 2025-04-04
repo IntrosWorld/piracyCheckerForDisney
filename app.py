@@ -105,10 +105,12 @@ st.markdown("""
     .stSelectbox label, .stSelectbox div, .stTextInput input {
         color: #fff !important;
     }
- @media only screen and (max-width: 768px) {
+    /* mobile */
+@media only screen and (max-width: 768px) {
     .stTabs [role="tablist"] {
         display: flex !important;
         flex-direction: column !important;
+        align-items: center !important;
         gap: 12px;
         background: none !important;
         padding: 0 !important;
@@ -120,11 +122,12 @@ st.markdown("""
         background: linear-gradient(to right, #00c6ff, #0072ff);
         border: none !important;
         border-radius: 12px !important;
-        padding: 14px 0 !important;
-        width: 100% !important;
+        padding: 12px 24px !important;
+        min-width: 200px;
+        max-width: 90%;
         text-align: center;
         font-weight: 600;
-        font-size: 16px;
+        font-size: 15px;
         color: white !important;
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
         transition: all 0.3s ease;
@@ -139,6 +142,7 @@ st.markdown("""
         color: white !important;
     }
 }
+
 
 </style>
 """, unsafe_allow_html=True)
