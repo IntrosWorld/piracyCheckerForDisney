@@ -107,6 +107,16 @@ st.markdown("""
     }
     /* mobile */
 @media only screen and (max-width: 768px) {
+    /* Reset container that holds tab content */
+    [data-testid="stHorizontalBlock"] > div:first-child {
+        background: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+        backdrop-filter: none !important;
+    }
+
+    /* Vertical buttons styling for tabs */
     .stTabs [role="tablist"] {
         display: flex !important;
         flex-direction: column !important;
@@ -116,6 +126,7 @@ st.markdown("""
         padding: 0 !important;
         box-shadow: none !important;
         border-radius: 0 !important;
+        backdrop-filter: none !important;
     }
 
     .stTabs [role="tab"] {
