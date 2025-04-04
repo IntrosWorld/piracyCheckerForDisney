@@ -2,24 +2,23 @@ import streamlit as st
 from duckduckgo_search import ddg
 
 def search_piracy_links(query, num_results=10):
-    """Safe DuckDuckGo search for piracy-related links."""
+    """Search DuckDuckGo for piracy-related links. Safe from index errors."""
     try:
-        # Run DuckDuckGo search
         raw_results = ddg(query, max_results=num_results)
 
-        if not raw_results or len(raw_results) == 0:
-            st.warning(f"⚠️ DuckDuckGo returned no results for: `{query}`")
-            return []
+        # Check if list is valid and has dicts
+        if not raw_results or not isinstance(raw_results, list):
+            raise ValueError("Empty or invalid result")
 
         results = []
         for item in raw_results:
             if not isinstance(item, dict):
-                continue  # skip if malformed result
+                continue  # Skip malformed
 
             results.append({
                 "title": item.get("title", "No Title"),
                 "link": item.get("href", "No Link"),
-                "snippet": item.get("body", "No description")
+                "snippet": item.get("body", "No Description")
             })
 
         return results
