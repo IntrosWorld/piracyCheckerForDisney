@@ -16,7 +16,6 @@ st.set_page_config(page_title="🎬 Safeguarding Stories", layout="wide")
 # 🌈 Inject Gradient Background
 # 💫 Full Gradient Background & Modern Glassmorphism UI
 st.markdown("""
-st.markdown("""
 <style>
 /* 🌈 Import Poppins Font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
