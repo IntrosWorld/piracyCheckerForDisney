@@ -1,26 +1,29 @@
-# gemini_utils.py
 import os
-import requests
-from bs4 import BeautifulSoup
 import streamlit as st
 import google.generativeai as genai
-from dotenv import load_dotenv
+import requests
+from bs4 import BeautifulSoup
 
-# Load .env variables locally (for local dev)
-load_dotenv()
-
-# API Key from secrets or .env
+# Load API key (from secrets if deployed, else from .env)
 api_key = st.secrets.get("GEMINI_API_KEY", os.getenv("GEMINI_API_KEY"))
 
 if not api_key:
-    st.error("❌ GEMINI_API_KEY not found.")
-    raise ValueError("API key missing")
+    st.error("❌ GEMINI_API_KEY not found in secrets or environment.")
+    raise ValueError("GEMINI_API_KEY is required")
 
 # Configure Gemini
 genai.configure(api_key=api_key)
 model = genai.GenerativeModel("gemini-2.0-flash")
 
+# ✅ Test Gemini API (optional for Streamlit debug)
+def test_gemini_api():
+    try:
+        response = model.generate_content("Reply only: {\"status\": \"Gemini is working!\"}")
+        return response.text
+    except Exception as e:
+        return f'{{"error": "Gemini failed: {e}"}}'
 
+# ✅ Check if content is Disney related
 def is_disney_content(title, description):
     prompt = f"""
 You are a copyright checker AI. Check if the following content is related to Disney:
@@ -31,42 +34,41 @@ Description: {description}
 Respond ONLY in JSON:
 {{
   "is_disney": true/false,
-  "reason": "Explain briefly why"
+  "reason": "Explain why"
 }}
 """
     try:
         response = model.generate_content(prompt)
         return response.text
     except Exception as e:
-        st.error(f"❌ Gemini API call failed: {e}")
-        return '{"error": "Gemini API call failed"}'
+        return f'{{"error": "Gemini API call failed: {e}"}}'
 
-
+# ✅ Analyze a webpage for pirated Disney content
 def analyze_webpage_with_gemini(url):
     try:
-        response = requests.get(url, timeout=10)
-        soup = BeautifulSoup(response.text, "html.parser")
-        text = soup.get_text()[:5000]
+        page = requests.get(url, timeout=10)
+        soup = BeautifulSoup(page.text, "html.parser")
+        text = soup.get_text()[:5000]  # Gemini input limit
     except Exception as e:
         return f'{{"error": "Failed to fetch page: {e}"}}'
 
     prompt = f"""
-You are a piracy detection expert AI.
+You are a piracy detection AI.
 
-Analyze the following webpage and detect if it contains references or links to pirated Disney content.
+Analyze the following webpage text and determine if it links to pirated Disney content:
 
 Text:
 {text}
 
-Respond in JSON format:
+Respond ONLY in JSON:
 {{
   "is_pirated": true/false,
   "confidence": 0-100,
-  "reason": "Brief explanation"
+  "reason": "Short reason"
 }}
 """
     try:
-        gemini_response = model.generate_content(prompt)
-        return gemini_response.text
+        response = model.generate_content(prompt)
+        return response.text
     except Exception as e:
         return f'{{"error": "Gemini analysis failed: {e}"}}'
