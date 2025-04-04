@@ -15,6 +15,7 @@ st.set_page_config(page_title="🎬 Safeguarding Stories", layout="wide")
 
 # 🌈 Inject Gradient Background
 # 💫 Full Gradient Background & Modern Glassmorphism UI
+you know there  are muitpler card. the prpnelm is only happening for cad wihc ocntains tabs. show try to fi xthsat brsauder other csrc dont hsvre thid prbolem
 st.markdown("""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
@@ -23,7 +24,7 @@ st.markdown("""
         font-family: 'Poppins', sans-serif;
     }
 
-    /* 🌈 Animated Gradient Background */
+    /* Background gradient animation */
     [data-testid="stApp"] {
         background: linear-gradient(-45deg, #1e3c72, #2a5298, #0f2027, #2c5364);
         background-size: 400% 400%;
@@ -37,71 +38,49 @@ st.markdown("""
         100% { background-position: 0% 50%; }
     }
 
-    /* 🎯 Fix TAB container specifically */
-    [data-testid="stHorizontalBlock"] > div:first-child {
-        background-color: rgba(255, 255, 255, 0.05) !important;
-        border-radius: 16px;
-        box-shadow: none !important;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        padding: 1rem;
-        margin-bottom: 1rem;
-        overflow: visible !important;
-    }
-
-    /* 🧼 Tab list fix */
+    /* Remove weird shadows or borders on mobile tabs */
     .stTabs [role="tablist"] {
+        background-color: rgba(255, 255, 255, 0.08) !important;
+        border-radius: 12px !important;
         overflow-x: auto;
-        background-color: transparent !important;
-        scrollbar-width: none;
+        box-shadow: none !important;
+        padding: 8px;
+        margin-bottom: 20px;
     }
 
-    .stTabs [role="tablist"]::-webkit-scrollbar {
-        display: none;
-    }
-
-    /* Tab items */
+    /* Each tab item */
     .stTabs [role="tab"] {
         color: #fff;
         padding: 8px 16px;
         border-radius: 8px;
         font-weight: 500;
         white-space: nowrap;
-        background: rgba(255, 255, 255, 0.08);
     }
 
+    /* Active tab */
     .stTabs [aria-selected="true"] {
-        background: rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.15) !important;
         border-bottom: 2px solid #fff !important;
         color: #fff !important;
     }
 
-    /* 🟦 Button hover */
-    .stButton>button {
-        color: #fff;
-        font-weight: 500;
-        border-radius: 8px;
-        padding: 0.6rem 1.2rem;
-        border: none;
-        background: linear-gradient(to right, #00c6ff, #0072ff);
-        transition: all 0.3s ease-in-out;
-    }
-
+    /* Fix button hover/text color */
     .stButton>button:hover {
-        background: linear-gradient(to right, #0072ff, #00c6ff);
+        background-color: #6c63ff !important;
+        color: #fff !important;
+        transition: 0.3s ease;
+    }
+
+    /* Transparent input cards */
+    .stMarkdown, .stSelectbox, .stTextInput>div {
+        background-color: rgba(255, 255, 255, 0.05) !important;
+        border-radius: 12px !important;
         color: #fff;
-        transform: scale(1.03);
-    }
-
-    /* ✨ Inputs and Dropdowns */
-    .stSelectbox, .stTextInput>div, .stMarkdown {
-        background-color: rgba(255, 255, 255, 0.06) !important;
-        border-radius: 12px;
-        color: white !important;
+        padding: 12px;
         backdrop-filter: blur(6px);
-        padding: 1rem;
     }
 
+    /* Force white text for dropdowns/inputs */
     .stSelectbox label, .stSelectbox div, .stTextInput input {
         color: #fff !important;
     }
