@@ -2,29 +2,28 @@ import streamlit as st
 from duckduckgo_search import ddg
 
 def search_piracy_links(query, num_results=10):
-    """Search DuckDuckGo for piracy-related links."""
-    results = []
-
+    """Safe DuckDuckGo search for piracy-related links."""
     try:
+        # Run DuckDuckGo search
         raw_results = ddg(query, max_results=num_results)
-        if not raw_results:
-            st.warning(f"⚠️ No results returned for: `{query}`")
+
+        if not raw_results or len(raw_results) == 0:
+            st.warning(f"⚠️ DuckDuckGo returned no results for: `{query}`")
             return []
 
-        for r in raw_results:
-            # Ensure expected fields are present
-            title = r.get("title", "No Title")
-            link = r.get("href", "No Link")
-            snippet = r.get("body", "")
+        results = []
+        for item in raw_results:
+            if not isinstance(item, dict):
+                continue  # skip if malformed result
 
             results.append({
-                "title": title,
-                "link": link,
-                "snippet": snippet
+                "title": item.get("title", "No Title"),
+                "link": item.get("href", "No Link"),
+                "snippet": item.get("body", "No description")
             })
 
-    except Exception as e:
-        st.error(f"❌ DuckDuckGo search failed: {e}")
-        return []
+        return results
 
-    return results
+    except Exception as e:
+        st.error(f"❌ DuckDuckGo search failed for `{query}`: {e}")
+        return []
