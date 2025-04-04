@@ -105,6 +105,32 @@ st.markdown("""
     .stSelectbox label, .stSelectbox div, .stTextInput input {
         color: #fff !important;
     }
+   /* 💡 Responsive Fix: Remove card style for tab block on small screens */
+    @media only screen and (max-width: 768px) {
+        .stTabs [role="tablist"],
+        [data-testid="stHorizontalBlock"] > div:first-child {
+            background: none !important;
+            padding: 0 !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+        }
+
+        .stTabs [role="tab"] {
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            width: 100%;
+            display: block;
+            text-align: center;
+            color: #fff;
+        }
+
+        .stTabs [aria-selected="true"] {
+            background: linear-gradient(to right, #0072ff, #00c6ff);
+            border: none;
+        }
+    }
 </style>
 """, unsafe_allow_html=True)
 
