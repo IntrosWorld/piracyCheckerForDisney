@@ -5,6 +5,7 @@ requests
 pandas
 numpy
 beautifulsoup4
-duckduckgo-search==0.9
+duckduckgo-search==2025.4.4
+
 
 
