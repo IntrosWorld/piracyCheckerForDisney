@@ -1,16 +1,18 @@
 import os
 import requests
 from urllib.parse import urlparse, parse_qs
-from dotenv import load_dotenv
-from google import genai
+import google.generativeai as genai  # ✅ Correct import
 import streamlit as st
 
-load_dotenv()
+# ✅ Load API keys
+api_key = st.secrets["GEMINI_API_KEY"]
+YOUTUBE_API_KEY = st.secrets["YOUTUBE_API_KEY"]
 
-client = genai.Client(api_key=st.secrets("GEMINI_API_KEY"))
-YOUTUBE_API_KEY = st.secrets("YOUTUBE_API_KEY")
+# ✅ Configure Gemini
+genai.configure(api_key=api_key)
+model = genai.GenerativeModel("gemini-2.0-flash")
 
-
+# 🎥 Extract YouTube video ID
 def extract_video_id(url):
     try:
         parsed = urlparse(url)
@@ -22,6 +24,7 @@ def extract_video_id(url):
     except:
         return None
 
+# 📊 Fetch video + channel info
 def fetch_video_details(video_id):
     url = f"https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id={video_id}&key={YOUTUBE_API_KEY}"
     video_response = requests.get(url).json()
@@ -29,44 +32,42 @@ def fetch_video_details(video_id):
     if "items" not in video_response or not video_response["items"]:
         return "", "", "", False, "0", "0", "0"
 
-    snippet = video_response["items"][0]["snippet"]
-    statistics = video_response["items"][0]["statistics"]
+    item = video_response["items"][0]
+    snippet = item["snippet"]
+    statistics = item["statistics"]
     channel_id = snippet.get("channelId", "")
     channel_title = snippet.get("channelTitle", "")
 
-    # Fetch channel details
+    # 👤 Fetch channel stats
     channel_url = f"https://www.googleapis.com/youtube/v3/channels?part=statistics&id={channel_id}&key={YOUTUBE_API_KEY}"
     channel_response = requests.get(channel_url).json()
 
     subscriber_count = "0"
-    if "items" in channel_response and len(channel_response["items"]) > 0:
+    if "items" in channel_response and channel_response["items"]:
         stats = channel_response["items"][0].get("statistics", {})
         subscriber_count = stats.get("subscriberCount", "0")
 
-    # Logic for verification
     try:
         is_verified = int(subscriber_count) >= 100000
     except:
         is_verified = False
 
-    # Video stats
     view_count = statistics.get("viewCount", "0")
     like_count = statistics.get("likeCount", "0")
 
     return snippet.get("title", ""), snippet.get("description", ""), channel_title, is_verified, subscriber_count, view_count, like_count
 
-
-
+# 💬 Get top comments
 def fetch_top_comments(video_id, max_results=5):
     url = f"https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&videoId={video_id}&key={YOUTUBE_API_KEY}&maxResults={max_results}&textFormat=plainText"
-    r = requests.get(url)
-    data = r.json()
+    response = requests.get(url).json()
     comments = []
-    for item in data.get("items", []):
+    for item in response.get("items", []):
         comment = item["snippet"]["topLevelComment"]["snippet"]["textDisplay"]
         comments.append(comment)
     return "\n".join(comments)
 
+# 🤖 Analyze with Gemini
 def analyze_with_gemini(title, description, comments, channel_title, is_verified):
     prompt = f"""
 You are a piracy detection AI.
@@ -91,9 +92,8 @@ Reply in JSON:
   "is_channel_verified": true/false
 }}
 """
-    response = client.models.generate_content(
-    model="gemini-2.0-flash",
-    contents=prompt
-)
-
-    return response.text
+    try:
+        response = model.generate_content(prompt)
+        return response.text
+    except Exception as e:
+        return f'{{"error": "Gemini call failed: {e}"}}'
