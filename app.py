@@ -106,54 +106,7 @@ st.markdown("""
         color: #fff !important;
     }
     /* mobile */
-@media only screen and (max-width: 768px) {
-    /* Reset container that holds tab content */
-    [data-testid="stHorizontalBlock"] > div:first-child {
-        background: none !important;
-        box-shadow: none !important;
-        padding: 0 !important;
-        border-radius: 0 !important;
-        backdrop-filter: none !important;
-    }
-
-    /* Vertical buttons styling for tabs */
-    .stTabs [role="tablist"] {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 12px;
-        background: none !important;
-        padding: 0 !important;
-        box-shadow: none !important;
-        border-radius: 0 !important;
-        backdrop-filter: none !important;
-    }
-
-    .stTabs [role="tab"] {
-        background: linear-gradient(to right, #00c6ff, #0072ff);
-        border: none !important;
-        border-radius: 12px !important;
-        padding: 12px 24px !important;
-        min-width: 200px;
-        max-width: 90%;
-        text-align: center;
-        font-weight: 600;
-        font-size: 15px;
-        color: white !important;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
-        transition: all 0.3s ease;
-    }
-
-    .stTabs [role="tab"]:hover {
-        transform: scale(1.03);
-    }
-
-    .stTabs [aria-selected="true"] {
-        background: linear-gradient(to right, #0072ff, #00c6ff) !important;
-        color: white !important;
-    }
-}
-
+st.markdown("""<style> ... </style>""", unsafe_allow_html=True)
 
 </style>
 """, unsafe_allow_html=True)
