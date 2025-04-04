@@ -14,61 +14,76 @@ from search_links import search_piracy_links
 st.set_page_config(page_title="🎬 Safeguarding Stories", layout="wide")
 
 # 🌈 Inject Gradient Background
+# 💫 Full Gradient Background & Modern Glassmorphism UI
 st.markdown("""
     <style>
-    body {
-        background: linear-gradient(-45deg, #1e3c72, #2a5298, #1e3c72, #2a5298);
+    /* ---- Animated Gradient Background ---- */
+    html, body, [data-testid="stApp"] {
+        height: 100%;
+        background: linear-gradient(-45deg, #1e3c72, #2a5298, #0f2027, #2c5364);
         background-size: 400% 400%;
-        animation: gradient 15s ease infinite;
-        color: white;
+        animation: gradientBG 15s ease infinite;
+        font-family: 'Segoe UI', sans-serif;
     }
 
-    @keyframes gradient {
+    @keyframes gradientBG {
         0% {background-position: 0% 50%;}
         50% {background-position: 100% 50%;}
         100% {background-position: 0% 50%;}
     }
 
-    .stMarkdown, .stButton>button, .stSelectbox {
-        background-color: rgba(0, 0, 0, 0.15);
-        border-radius: 12px;
-        padding: 10px;
+    /* ---- Transparent UI Glass Cards ---- */
+    .stMarkdown, .stButton>button, .stSelectbox, .stTextInput>div, .stTabs [role="tablist"] {
+        background-color: rgba(255, 255, 255, 0.08) !important;
+        border-radius: 16px !important;
+        padding: 12px !important;
+        color: #fff;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
     }
 
-    h1, h2, h3, h4, .stTextInput>label {
-        color: white;
+    /* ---- Headings and labels ---- */
+    h1, h2, h3, h4, h5, h6, label, .css-10trblm, .stTabs [role="tab"] {
+        color: #ffffff !important;
+        font-weight: 600;
     }
 
-    .stAlert {
-        background-color: rgba(0, 0, 0, 0.3) !important;
-        border-radius: 10px;
-    }
-
+    /* ---- Button Styling ---- */
     .stButton>button {
-        background-color: #4CAF50;
+        background-color: #00c6ff;
+        background-image: linear-gradient(to right, #0072ff, #00c6ff);
         color: white;
         border: none;
-        padding: 10px 16px;
-        border-radius: 10px;
+        padding: 10px 20px;
+        border-radius: 12px;
+        font-size: 16px;
         font-weight: bold;
-        transition: 0.3s;
+        transition: 0.3s ease-in-out;
     }
 
     .stButton>button:hover {
-        background-color: #66bb6a;
+        background-image: linear-gradient(to right, #00c6ff, #0072ff);
+        transform: scale(1.02);
     }
 
-    .stTabs [role="tablist"] {
-        background-color: #111;
-        border-radius: 10px;
+    /* ---- Success/Error/Warning Boxes ---- */
+    .stAlert {
+        border-radius: 12px !important;
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        color: #fff !important;
+        font-weight: 500;
+        backdrop-filter: blur(10px);
     }
 
-    .stTabs [role="tab"] {
-        color: white;
+    /* ---- Video + Expander Panels ---- */
+    .element-container iframe, .stExpander {
+        border-radius: 12px;
+        overflow: hidden;
     }
 
     </style>
 """, unsafe_allow_html=True)
+
 
 
 
