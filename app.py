@@ -16,21 +16,22 @@ st.set_page_config(page_title="🎬 Safeguarding Stories", layout="wide")
 # 🌈 Inject Gradient Background
 # 💫 Full Gradient Background & Modern Glassmorphism UI
 st.markdown("""
-  <style>
+ <style>
+/* ------------------ 🌟 Fonts & Layout ------------------ */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
-/* ---- Base Font ---- */
 html, body, [class*="css"] {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif !important;
     color: #ffffff;
 }
 
-/* ---- Animated Gradient Background ---- */
+/* ------------------ 🌌 Animated Gradient Background ------------------ */
 html, body, [data-testid="stApp"] {
     height: 100%;
     background: linear-gradient(-45deg, #1e3c72, #2a5298, #0f2027, #2c5364);
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
+    font-family: 'Poppins', sans-serif;
 }
 
 @keyframes gradientBG {
@@ -39,91 +40,86 @@ html, body, [data-testid="stApp"] {
     100% {background-position: 0% 50%;}
 }
 
-/* ---- Glass UI Elements ---- */
-.stMarkdown, .stSelectbox, .stTextInput>div {
+/* ------------------ 🧊 Glassmorphism Cards ------------------ */
+.stMarkdown, .stButton > button, .stSelectbox, .stTextInput > div, .stTabs [role="tablist"], .stTabs [role="tab"] {
     background-color: rgba(255, 255, 255, 0.08) !important;
     border-radius: 16px !important;
-    padding: 12px !important;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    color: #fff !important;
+    padding: 10px !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #ffffff !important;
+    border: none !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* ---- Tab Bar Specific Fix ---- */
+/* ------------------ 🎛️ Tabs Styling ------------------ */
 .stTabs [role="tablist"] {
-    background-color: rgba(255, 255, 255, 0.06) !important;
-    border-radius: 12px !important;
-    padding: 8px 12px !important;
-    margin-bottom: 20px;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    box-shadow: none !important;
-    overflow-x: auto !important;
-    white-space: nowrap;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    margin: 0;
+    border-radius: 12px;
 }
 
-/* ---- Tab Buttons ---- */
+.stTabs [role="tablist"]::-webkit-scrollbar {
+    display: none;
+}
+
 .stTabs [role="tab"] {
+    flex: 1 1 auto;
+    white-space: nowrap;
     color: #fff !important;
     font-weight: 500;
-    padding: 6px 16px;
-    margin-right: 6px;
+    text-align: center;
     border-radius: 8px;
-    transition: all 0.3s ease;
+    padding: 10px 20px;
+    transition: background 0.3s ease;
 }
 
 .stTabs [role="tab"]:hover {
-    background: rgba(255, 255, 255, 0.12);
+    background-color: rgba(255, 255, 255, 0.15) !important;
 }
 
 .stTabs [role="tab"][aria-selected="true"] {
-    background: rgba(255, 255, 255, 0.15);
-    border-bottom: 2px solid white;
+    background: rgba(255, 255, 255, 0.2);
+    border-bottom: 2px solid #00c6ff;
 }
 
-/* ---- Headings and Labels ---- */
-h1, h2, h3, h4, h5, h6, label, .css-10trblm {
-    color: #ffffff !important;
-    font-weight: 600;
-}
-
-/* ---- Button Styling ---- */
+/* ------------------ 🔘 Buttons ------------------ */
 .stButton > button {
-    background-color: #00c6ff;
-    background-image: linear-gradient(to right, #0072ff, #00c6ff);
-    color: white !important;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: bold;
-    transition: 0.3s ease-in-out;
-    box-shadow: 0px 4px 12px rgba(0, 198, 255, 0.4);
-}
-
-/* 👇 Hover Button */
-.stButton > button:hover {
-    background-image: linear-gradient(to right, #00c6ff, #0072ff); /* Blue shade on hover */
-    transform: scale(1.04);
-    box-shadow: 0px 6px 15px rgba(0, 198, 255, 0.6);
-    color: white !important;
-}
-
-/* ---- Success, Error, Warning Boxes ---- */
-.stAlert {
-    border-radius: 12px !important;
-    background-color: rgba(255, 255, 255, 0.1) !important;
+    background: linear-gradient(to right, #00c6ff, #0072ff) !important;
     color: #fff !important;
-    font-weight: 500;
-    backdrop-filter: blur(10px);
+    font-weight: 600 !important;
+    transition: all 0.3s ease;
+    border: none;
 }
 
-/* ---- Video + Expander Panels ---- */
-.element-container iframe, .stExpander {
-    border-radius: 12px;
-    overflow: hidden;
+.stButton > button:hover {
+    background: linear-gradient(to right, #0099cc, #0052cc) !important;
+    transform: translateY(-1px);
+}
+
+/* ------------------ 📱 Mobile Font Adjustments ------------------ */
+@media screen and (max-width: 768px) {
+    .stTabs [role="tab"] {
+        font-size: 14px;
+        padding: 8px 14px;
+    }
+
+    h1, h2, h3 {
+        font-size: 1.2rem !important;
+    }
+
+    .stMarkdown {
+        padding: 8px !important;
+    }
 }
 </style>
+
+
 
 """, unsafe_allow_html=True)
 
